@@ -40,7 +40,6 @@ public class RedisConfig {
         final RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
         config.setHostName(redisHost);
         config.setPort(redisPort.get());
-
         if (!redisUsername.isEmpty() && !redisPassword.isEmpty()) {
             config.setUsername(redisUsername);
             config.setPassword(redisPassword);
