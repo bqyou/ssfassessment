@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .error {color: red}
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <form
+        action="#"
+        data-th-action="@{/pizza/order}"
+        data-th-object="${customer}"
+        method="POST">
+    <h2>Order Delivery Details</h2><br>
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td><input type = "text" data-th-field="*{name}" ></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><span class="error" data-th-if="${#fields.hasErrors('name')}"
+                data-th-errors="*{name}"></span></td>
+        </tr>
+        <tr>
+            <td>Address:</td>
+            <td><input type = "text" data-th-field="*{address}" ></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><span class="error" data-th-if="${#fields.hasErrors('address')}"
+                data-th-errors="*{address}"></span></td>
+        </tr>
+        <tr>
+            <td>Phone:</td>
+            <td><input type = "number" data-th-field="*{phoneNumber}" ></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><span class="error" data-th-if="${#fields.hasErrors('phoneNumber')}"
+                data-th-errors="*{phoneNumber}"></span></td>
+        </tr>
+        <tr>
+            <td>Rush:</td>
+            <td><input type = "checkbox" data-th-field="*{rush}" value="true"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+        
+        <tr>
+            <td style="vertical-align: top">Comments:</td>
+            <td><input type = "text" data-th-field="*{comments}" style="height:50px; vertical-align: top;" ></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><span class="error" data-th-if="${#fields.hasErrors('comments')}"
+                data-th-errors="*{comments}"></span></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button type="reset">Cancel</button> <button type="submit">Place order</button></td>
+        </tr>
+    </table>
+    </form>
+</body>
+</html>

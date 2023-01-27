@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p data-th-object="${customer}">
+        <h2>Delivery details </h2> <br>
+        Order Number: <a data-th-text="*{id}" href="/order/*{id}"></a> <br><br>
+        Your order will be delivered to <span data-th-text="*{address}"></span><br><br>
+        Pizza cost: $<span data-th-text="${customer.rush} ? *{cost}+2 : *{cost}"></span><br><br>
+        Rush: <span data-th-text="${customer.rush} ? '$2' :'none' "></span><br><br>
+        Total cost: $<span data-th-text="*{cost}"></span><br>
+    </p>
+</body>
+</html>
