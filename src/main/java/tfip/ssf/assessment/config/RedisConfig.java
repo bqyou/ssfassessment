@@ -28,11 +28,11 @@ public class RedisConfig {
     @Value("${spring.redis.port}")
     private Optional<Integer> redisPort;
 
-    // @Value("${spring.redis.username}")
-    // private String redisUsername;
+    @Value("${spring.redis.username}")
+    private String redisUsername;
 
-    // @Value("${spring.redis.password}")
-    // private String redisPassword;
+    @Value("${spring.redis.password}")
+    private String redisPassword;
 
     @Bean
     @Scope("singleton")
@@ -41,11 +41,11 @@ public class RedisConfig {
         config.setHostName(redisHost);
         config.setPort(redisPort.get());
 
-        // if (!redisUsername.isEmpty() && !redisPassword.isEmpty()) {
-        // config.setUsername(redisUsername);
-        // config.setPassword(redisPassword);
-        // }
-        // config.setDatabase(0);
+        if (!redisUsername.isEmpty() && !redisPassword.isEmpty()) {
+            config.setUsername(redisUsername);
+            config.setPassword(redisPassword);
+        }
+        config.setDatabase(0);
         final JedisClientConfiguration jedisClient = JedisClientConfiguration.builder().build();
         final JedisConnectionFactory jedisFac = new JedisConnectionFactory(config,
                 jedisClient);

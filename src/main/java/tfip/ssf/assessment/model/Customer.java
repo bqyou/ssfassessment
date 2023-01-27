@@ -32,7 +32,17 @@ public class Customer {
 
     private Integer quantity;
 
+    private float pizzacost;
+
     private float cost;
+
+    public float getPizzacost() {
+        return pizzacost;
+    }
+
+    public void setPizzacost(float pizzacost) {
+        this.pizzacost = pizzacost;
+    }
 
     public String getId() {
         return id;

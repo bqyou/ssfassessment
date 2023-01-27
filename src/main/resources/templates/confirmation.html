@@ -9,11 +9,11 @@
 <body>
     <p data-th-object="${customer}">
         <h2>Delivery details </h2> <br>
-        Order Number: <a data-th-text="*{id}" href="/order/*{id}"></a> <br><br>
-        Your order will be delivered to <span data-th-text="*{address}"></span><br><br>
-        Pizza cost: $<span data-th-text="${customer.rush} ? *{cost}+2 : *{cost}"></span><br><br>
+        Order Number: <a data-th-text="${customer.id}" data-th-href="@{/order/{id}(id=${customer.id})}"></a> <br><br>
+        Your order will be delivered to <span data-th-text="${customer.address}"></span><br><br>
+        Pizza cost: $<span data-th-text="${customer.pizzacost}"></span><br><br>
         Rush: <span data-th-text="${customer.rush} ? '$2' :'none' "></span><br><br>
-        Total cost: $<span data-th-text="*{cost}"></span><br>
+        Total cost: $<span data-th-text="${customer.cost}"></span><br>
     </p>
 </body>
 </html>

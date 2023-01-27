@@ -17,8 +17,8 @@ public class PizzaService {
         redisTemplate.opsForValue().set(customer.getId(), customer.toJSON().toString());
     }
 
-    public JsonObject findById(String id) {
+    public String findById(String id) {
 
-        return (JsonObject) redisTemplate.opsForValue().get(id);
+        return (String) redisTemplate.opsForValue().get(id);
     }
 }

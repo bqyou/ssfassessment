@@ -1,5 +1,7 @@
 package tfip.ssf.assessment.controller;
 
+import java.text.DecimalFormat;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,6 +26,8 @@ import tfip.ssf.assessment.service.PizzaService;
 @Controller
 @RequestMapping
 public class PizzaController {
+
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     @Autowired
     private PizzaService pizzaSvc;
@@ -60,10 +64,13 @@ public class PizzaController {
         customer.setSize(o.getSize());
         customer.setQuantity(o.getQuantity());
         float cost = calcTotal(customer.getPizza(), customer.getSize(), customer.getQuantity(), customer.getRush());
-        customer.setCost(cost);
+        customer.setCost(Float.parseFloat(df.format(cost)));
+        if (customer.getRush()) {
+            customer.setPizzacost(Float.parseFloat(df.format(cost)) - 2);
+        } else {
+            customer.setPizzacost(Float.parseFloat(df.format(cost)));
+        }
         model.addAttribute("customer", customer);
-        System.out.println(customer.getCost());
-        System.out.println(customer.getId());
         pizzaSvc.saveOrder(customer);
         return "confirmation";
 
@@ -102,9 +109,10 @@ public class PizzaController {
     }
 
     @ResponseBody
-    @RequestMapping(path = "/order/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/order/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getOrder(@PathVariable String id) {
-        JsonObject order = pizzaSvc.findById(id);
+        String order = pizzaSvc.findById(id);
+        System.out.println(order);
         if (order != null) {
             return ResponseEntity
                     .status(HttpStatus.OK)
